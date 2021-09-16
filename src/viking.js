@@ -48,22 +48,26 @@ class Saxon extends Soldier {
        return `A Saxon has died in combat`
      }
 }
+};
 
 // War
 class War {
-  constructor(vikingArmy,saxonArmy) {
+  constructor() {
     this.vikingArmy = [];
     this.saxonArmy = [];
   }
-addViking(viking) {
-  let this.vikingArmy = viking.push();
+
+  addViking(viking) {
+  this.vikingArmy.push(viking);
 }
+
 addSaxon(saxon) {
-  let this.saxonArmy = saxon.push();
+  this.saxonArmy.push(saxon);
 }
-vikingAttack()
-saxonAttack()
-showStatus()
+
+vikingAttack() {}
+//saxonAttack()
+//showStatus()
 }
 
 
