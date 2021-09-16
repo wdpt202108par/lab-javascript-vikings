@@ -1,4 +1,4 @@
-class Animal {
+/*class Animal {
   constructor(chosenName, chosenColor, chosenSound) {
     this.name = chosenName
     this.mainColor = chosenColor
@@ -25,7 +25,7 @@ mydog.scream(8)
 
 mycat = new Cat('Felix', 'white', 'meow', 4) // {name: , mainColor: , sound: , nbOfLegs}
 mycat.scream(2)
-mycat.openDoor()
+mycat.openDoor()*/
 
 
 
@@ -37,12 +37,10 @@ class Soldier {
   }
 
   attack() {
-
     return this.strength
   }
 
   receiveDamage(damage) {
-
     const newHealth = this.health - damage
     this.health = newHealth
   }
@@ -54,7 +52,28 @@ mySoldier.attack()
 mySoldier.receiveDamage(1) // {health: 4, strength: 5}
 
 // Viking
-class Viking {}
+class Viking extends Soldier {
+  constructor(name, health, strength) {
+    super(health, strength)
+    this.name = name
+  }
+
+  receiveDamage(damage) {
+    super.receiveDamage(damage)
+    if (this.health > 0) {
+      return `${this.name} has received ${damage} points of damage`}
+      else {return `${this.name} has died in act of combat`}
+    }
+
+  battleCry() {
+      return `Odin Owns You All!`
+    }  
+}
+
+myViking = new Viking('babar', 5, 5)
+myViking.attack()
+myViking.receiveDamage(1)
+myViking.battleCry()
 
 // Saxon
 class Saxon {}
