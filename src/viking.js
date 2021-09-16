@@ -18,7 +18,6 @@ class Viking extends Soldier {
 		this.name = name;
 		super(health, strength);
 	}
-
 	receiveDamage(damage) {
 		this.health -= damage;
 
@@ -55,20 +54,44 @@ class War {
 	}
 
 	addViking(Viking) {
-		this.vikingArmy += Viking;
+		this.vikingArmy.push(Viking);
+		// miniscule
 	}
 
-	addSaxon(Saxon) {
-		this.saxonArmy += Saxon;
+	addSaxon(saxon) {
+		this.saxonArmy.push(saxon);
 	}
 
 	vikingAttack() {
+		let saxonRandom = Math.trunc(Math.random() * this.saxonArmy.length); // random number 
+		let vikingRandom = Math.trunc(Math.random() * this.VikingArmy.length);
+
+		let chooseSaxon = saxonArmy[saxonRandom];		
+		let chooseViking = vikingArmy[vikingRandom];
+
+		let damage = chooseViking.attack();
 		
-		Saxon.receiveDamage(damage)
+		if (chooseSaxon.health === 0){
+			this.saxonArmy.splice(saxonRandom, 1);
+		}
+		return chooseSaxon.receiveDamage(damage);
+	}
+	
+	saxonAttack(){
+		let saxonRandom = Math.trunc(Math.random() * this.saxonArmy.length); // random number 
+		let vikingRandom = Math.trunc(Math.random() * this.VikingArmy.length);
+
+		let chooseSaxon = saxonArmy[saxonRandom];		
+		let chooseViking = vikingArmy[vikingRandom];
+
+		let damage = chooseSaxon.attack();
+
+		if (chooseViking.health === 0){
+			this.vikingArmy.splice(vikingRandom, 1);
+		}
+		return chooseViking.receiveDamage(damage);
 	}
 }
-
-
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
