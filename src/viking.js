@@ -76,7 +76,26 @@ myViking.receiveDamage(1)
 myViking.battleCry()
 
 // Saxon
-class Saxon {}
+class Saxon extends Soldier {
+
+  receiveDamage(damage) {
+    super.receiveDamage(damage) 
+      if ( this.health > 0) {
+        return `A Saxon has received ${damage} points of damage`
+      }
+      else{
+        return 'A Saxon has died in combat'
+      } 
+    }
+    
+}
+
+mySaxon = new Saxon(5, 5)
+mySaxon.attack()
+mySaxon.receiveDamage(1)
+
+
+
 
 // War
 class War {}
