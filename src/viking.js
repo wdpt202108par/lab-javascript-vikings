@@ -4,24 +4,28 @@ class Soldier {
 		this.health = health;
 		this.strength = strength;
 	}
+
 	attack(){
 		return this.strength;
 	}
+
 	receiveDamage(damage){
 		this.health -= damage;
 	}
 }
 
+
 // Viking
 class Viking extends Soldier {
 	constructor(name, health, strength) {
-		this.name = name;
 		super(health, strength);
+		this.name = name;
 	}
+
 	receiveDamage(damage) {
 		this.health -= damage;
 
-		if (this.health === 0) {
+		if (this.health <= 0) {
 			return `${this.name} has died in act of combat`;
 		}
 
@@ -29,19 +33,20 @@ class Viking extends Soldier {
 	}
 
 	battleCry() {
-		return "Odins Owns You All!";
+		return "Odin Owns You All!";
 	}
 }
+
 
 // Saxon
 class Saxon extends Soldier {
 	receiveDamage(damage){
 		this.health -= damage;
 		
-		if (this.helath === 0){
-			return `A Saxon has received ${damage} points of damage`;
+		if (this.health <= 0){
+			return `A Saxon has died in combat`;
 		}
-		return `A Saxon has died in combat`;
+		return `A Saxon has received ${damage} points of damage`;
 	}
 }
 
@@ -58,40 +63,43 @@ class War {
 		// miniscule
 	}
 
-	addSaxon(saxon) {
-		this.saxonArmy.push(saxon);
+	addSaxon(Saxon) {
+		this.saxonArmy.push(Saxon);
 	}
 
 	vikingAttack() {
 		let saxonRandom = Math.trunc(Math.random() * this.saxonArmy.length); // random number 
-		let vikingRandom = Math.trunc(Math.random() * this.VikingArmy.length);
+		let vikingRandom = Math.trunc(Math.random() * this.vikingArmy.length);
 
-		let chooseSaxon = saxonArmy[saxonRandom];		
-		let chooseViking = vikingArmy[vikingRandom];
+		let chosenSaxon = this.saxonArmy[saxonRandom];		
+		let chosenViking = this.vikingArmy[vikingRandom];
 
-		let damage = chooseViking.attack();
+		let damage = chosenViking.attack();
+		let receivedDamage = chosenSaxon.receiveDamage(damage);
 		
-		if (chooseSaxon.health === 0){
+		if (chosenSaxon.health <= 0){
 			this.saxonArmy.splice(saxonRandom, 1);
 		}
-		return chooseSaxon.receiveDamage(damage);
+		return receivedDamage;
 	}
 	
 	saxonAttack(){
 		let saxonRandom = Math.trunc(Math.random() * this.saxonArmy.length); // random number 
-		let vikingRandom = Math.trunc(Math.random() * this.VikingArmy.length);
+		let vikingRandom = Math.trunc(Math.random() * this.vikingArmy.length);
 
-		let chooseSaxon = saxonArmy[saxonRandom];		
-		let chooseViking = vikingArmy[vikingRandom];
+		let chosenSaxon = this.saxonArmy[saxonRandom];		
+		let chosenViking = this.vikingArmy[vikingRandom];
 
-		let damage = chooseSaxon.attack();
-
-		if (chooseViking.health === 0){
-			this.vikingArmy.splice(vikingRandom, 1);
+		let damage = chosenSaxon.attack();
+		let receivedDamage = chosenViking.receiveDamage(damage);
+		
+		if (chosenViking.health <= 0){
+			this.vikingArmy.splice(saxonRandom, 1);
 		}
-		return chooseViking.receiveDamage(damage);
+		return receivedDamage;
 	}
 }
+
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
