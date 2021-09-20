@@ -42,7 +42,7 @@ class Saxon extends Soldier {
     }
   } 
 }
-  
+
 // War
 class War {
   constructor (){
